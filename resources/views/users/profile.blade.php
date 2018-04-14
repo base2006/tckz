@@ -10,7 +10,7 @@
                 Name: {{ $user->name }}<br>
                 Email: {{ $user->email }}
             </p>
-            <a href="{{ route('user.edit', Auth::user()->id) }}" class="btn btn-accent"><i class="material-icons">edit</i> Edit Profile</a>
+            <a href="{{ route('users.edit', Auth::user()->id) }}" class="btn btn-accent"><i class="material-icons">edit</i> Edit Profile</a>
         </div>
     </div>
 @endsection

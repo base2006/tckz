@@ -53,8 +53,8 @@
                                         </a>
 
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a href="{{ route('user.profile', Auth::user()->id) }}" class="dropdown-item">Profile</a>
-                                            <a href="{{ route('user.edit', Auth::user()->id) }}" class="dropdown-item">Edit Profile</a>
+                                            <a href="{{ route('users.profile', Auth::user()->id) }}" class="dropdown-item">Profile</a>
+                                            <a href="{{ route('users.edit', Auth::user()->id) }}" class="dropdown-item">Edit Profile</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
@@ -84,7 +84,8 @@
 </div>
 
 <!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="{{ asset('js/app.js') }}" defer></script>
-@yield('scripts')
+@stack('scripts')
 </body>
 </html>

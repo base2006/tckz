@@ -6,7 +6,7 @@
     <div class="card">
         <div class="card-body">
             <h3 class="card-title">Edit Profile</h3>
-            <form action="{{ route('user.update', Auth::user()->id) }}" method="POST">
+            <form action="{{ route('users.update', Auth::user()->id) }}" method="POST">
                 @method('PUT')
                 @csrf
                 <div class="form-group">

@@ -3,8 +3,15 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
 require('./bootstrap');
+
+// Datatables
+require('datatables.net');
+require('datatables.net-bs4');
+require('datatables.net-responsive');
+require('datatables.net-responsive-bs4');
+require('datatables.net-buttons');
+require('datatables.net-buttons-bs4');
 
 // window.Vue = require('vue');
 

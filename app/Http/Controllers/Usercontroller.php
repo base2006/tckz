@@ -15,7 +15,9 @@ class Usercontroller extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+
+        return view('users.index')->with('users', $users);
     }
 
     /**
@@ -47,13 +49,13 @@ class Usercontroller extends Controller
      */
     public function show($id)
     {
-//        if (!Auth::user()->hasRole('admin')) {
-//            $id = Auth::user()->id;
-//        }
+        if (!Auth::user()->hasRole('admin')) {
+            $id = Auth::user()->id;
+        }
 
         $user = User::find($id);
 
-        return view('user.profile')->with('user', $user);
+        return view('users.profile')->with('user', $user);
     }
 
     /**
@@ -64,13 +66,13 @@ class Usercontroller extends Controller
      */
     public function edit($id)
     {
-//        if (!Auth::user()->hasRole('admin')) {
-//            $id = Auth::user()->id;
-//        }
+        if (!Auth::user()->hasRole('admin')) {
+            $id = Auth::user()->id;
+        }
 
         $user = User::find($id);
 
-        return view('user.edit')->with('user', $user);
+        return view('users.edit')->with('user', $user);
     }
 
     /**
@@ -106,7 +108,7 @@ class Usercontroller extends Controller
 
         $user->save();
 
-        return redirect()->route('user.profile', $user->id)->with('success', 'Your profile has been updated succesfully.');
+        return redirect()->route('users.profile', $user->id)->with('success', 'Your profile has been updated succesfully.');
     }
 
     /**
@@ -120,13 +122,13 @@ class Usercontroller extends Controller
         $user = User::find($id);
 
         if ($user->id == Auth::user()->id) {
-            return view('home')->with('error', 'Your own account can not be removed');
+            return view('users.index')->with('error', 'Your own account can not be removed');
         }
 
         $user->delete();
 
         $success = "The user has successfully been deleted.";
 
-        return view('home')->with('success', $success);
+        return view('users.edit')->with('success', $success);
     }
 }

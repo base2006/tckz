@@ -7,6 +7,7 @@
             <li class="nav-item"><a href="{{ route('home') }}" class="nav-link text-light"><i class="material-icons">dashboard</i> Dashboard</a></li>
             <li class="nav-item"><a href="#" class="nav-link text-light"><i class="material-icons">event</i> Events</a></li>
             <li class="nav-item"><a href="#" class="nav-link text-light"><i class="material-icons">confirmation_number</i> Tickets</a></li>
+            <li class="nav-item"><a href="{{ route('users.index') }}" class="nav-link text-light"><i class="material-icons">people</i> Users</a></li>
             <li class="nav-item"><a href="#" class="nav-link text-light"><i class="material-icons">settings</i> Settings</a></li>
         </ul>
     </div>
