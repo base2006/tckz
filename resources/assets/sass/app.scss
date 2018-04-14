@@ -1,14 +1,130 @@
-
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,600');
+@import url('https://fonts.googleapis.com/css?family=Lobster+Two:700i');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 // Variables
 @import "variables";
-
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+// Overrides
+@import "overrides";
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+// Buttons
+.btn-accent {
+    color: #212529;
+    background-color: $accent;
+    border-color: $accent;
 }
+
+.btn-accent:hover {
+    color: #212529;
+    background-color: darken($accent, 10%);
+    border-color: darken($accent, 10%);
+}
+
+.btn-accent:focus,
+.btn-accent.focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5);
+}
+
+.btn-accent.disabled,
+.btn-accent:disabled {
+    color: #212529;
+    background-color: $accent;
+    border-color: $accent;
+}
+
+.btn-outline-warning {
+    color: $accent;
+    background-color: transparent;
+    background-image: none;
+    border-color: $accent;
+}
+
+.btn-outline-warning:hover {
+    color: #212529;
+    background-color: $accent;
+    border-color: $accent;
+}
+
+.btn-outline-warning:focus,
+.btn-outline-warning.focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5);
+}
+
+.btn-outline-warning.disabled,
+.btn-outline-warning:disabled {
+    color: $accent;
+    background-color: transparent;
+}
+
+// Navbar
+.messages, .notifications {
+    &.unread i {
+        position: relative;
+        &:after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            right: -4px;
+            display: block;
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            background-color: $accent;
+        }
+    }
+}
+
+// Sidebar
+#sidebar {
+    height: 100vh;
+    .logo {
+        background: $active-bg;
+        border-bottom: 1px solid lighten($active-bg, 10%);
+        #tckz_logo {
+            max-width: 2.1rem;
+            height: auto;
+            display: inline-block;
+            margin-right: 1rem;
+        }
+        .logo-text {
+            font-family: 'Lobster Two', cursive;
+            font-size: 2.75rem;
+            color: $accent;
+        }
+    }
+    .nav-link {
+        position: relative;
+        border-left: 3px solid transparent;
+        i {
+            margin-right: 1rem;
+        }
+    }
+    .nav-item {
+        &.active .nav-link, .nav-link:hover {
+            border-left-color: $accent;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            background-color: $active-bg;
+        }
+        &.active .nav-link {
+            i {
+                color: $accent;
+            }
+        }
+    }
+}
+
+#content-panel > .row {
+    flex-flow: column;
+    .navbar {
+        flex: 0 1 70px;
+    }
+    #content {
+        flex: 1 1 auto;
+        background-color: $active-bg;
+    }
+}
+
