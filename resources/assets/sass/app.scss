@@ -97,22 +97,44 @@
             color: $accent;
         }
     }
-    .nav-link {
-        position: relative;
-        border-left: 3px solid transparent;
+    #sidebar-menu {
+
+        .nav-link {
+            position: relative;
+            border-left: 3px solid transparent;
+        }
         i {
             margin-right: 1rem;
         }
-    }
-    .nav-item {
-        &.active .nav-link, .nav-link:hover {
-            border-left-color: $accent;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            background-color: $active-bg;
+        > .nav-item {
+            &.active > .nav-link, > .nav-link:hover {
+                background-color: $active-bg;
+                border-left-color: $accent;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                i {
+                    color: $accent;
+                }
+            }
         }
-        &.active .nav-link {
-            i {
-                color: $accent;
+        .submenu {
+            padding-left: 0;
+            background-color: $dark-bg;
+            li {
+                list-style: none;
+            }
+            .submenu-item {
+                border-left: none;
+                .submenu-link {
+                    padding-left: 3.5rem;
+                }
+                &.active .submenu-link, .submenu-link:hover {
+                    background-color: $active-bg;
+                    border-left-color: $accent;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                    i {
+                        color: $accent;
+                    }
+                }
             }
         }
     }

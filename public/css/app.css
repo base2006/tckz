@@ -10762,24 +10762,55 @@ body {
   color: #f1c40f;
 }
 
-#sidebar .nav-link {
+#sidebar #sidebar-menu .nav-link {
   position: relative;
   border-left: 3px solid transparent;
 }
 
-#sidebar .nav-link i {
+#sidebar #sidebar-menu i {
   margin-right: 1rem;
 }
 
-#sidebar .nav-item.active .nav-link,
-#sidebar .nav-item .nav-link:hover {
+#sidebar #sidebar-menu > .nav-item.active > .nav-link,
+#sidebar #sidebar-menu > .nav-item > .nav-link:hover {
+  background-color: #34495e;
   border-left-color: #f1c40f;
   -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  background-color: #34495e;
 }
 
-#sidebar .nav-item.active .nav-link i {
+#sidebar #sidebar-menu > .nav-item.active > .nav-link i,
+#sidebar #sidebar-menu > .nav-item > .nav-link:hover i {
+  color: #f1c40f;
+}
+
+#sidebar #sidebar-menu .submenu {
+  padding-left: 0;
+  background-color: #2c3e50;
+}
+
+#sidebar #sidebar-menu .submenu li {
+  list-style: none;
+}
+
+#sidebar #sidebar-menu .submenu .submenu-item {
+  border-left: none;
+}
+
+#sidebar #sidebar-menu .submenu .submenu-item .submenu-link {
+  padding-left: 3.5rem;
+}
+
+#sidebar #sidebar-menu .submenu .submenu-item.active .submenu-link,
+#sidebar #sidebar-menu .submenu .submenu-item .submenu-link:hover {
+  background-color: #34495e;
+  border-left-color: #f1c40f;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#sidebar #sidebar-menu .submenu .submenu-item.active .submenu-link i,
+#sidebar #sidebar-menu .submenu .submenu-item .submenu-link:hover i {
   color: #f1c40f;
 }
 
