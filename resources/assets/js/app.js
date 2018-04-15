@@ -28,21 +28,29 @@ require('datatables.net-buttons-bs4');
 // });
 
 $(document).ready(function () {
-    $("#sidebar .submenu").css({
-        "height": 0,
-        "opacity": 0
-    });
     // active menu item
     $("#sidebar .nav a").each(function () {
         if (this.href == window.location.href) {
             $(this).parent().addClass("active");
+            // set parent active if sub item is active
+            if ($(this).parent().parent().hasClass('submenu')) {
+                $(this).parent().parent().parent().addClass('active');
+            }
         }
     });
+
+    // Hide submenu
+    $("#sidebar .submenu").css({
+        "height": 0,
+        "opacity": 0
+    });
+    // show submenu for active menu item
     $("#sidebar .active .submenu").css({
         "height": "auto",
         "opacity": 1
     });
 
+    // show submenu on hover
     $("#sidebar .nav-item").not('.active').hover(function () {
         var submenu = $(this).find(".submenu");
         var amount = submenu.children('li').length * 55;
