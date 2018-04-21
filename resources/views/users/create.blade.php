@@ -19,6 +19,15 @@
                            placeholder="What's your emailaddress?" value="{{ old('email') }}">
                 </div>
                 <div class="form-group">
+                    <label for="role">Role</label>
+                    <select name="role" id="role" class="form-control">
+                        <option>Select a role</option>
+                        @foreach($roles as $role)
+                            <option value="{{ $role->name }}" {{ (old('role') == $role->name) ? 'selected' : '' }}>{{ ucfirst($role->name) }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" name="password"
                            placeholder="Enter a password.">

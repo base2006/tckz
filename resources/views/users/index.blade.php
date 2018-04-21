@@ -24,10 +24,19 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ ucfirst($user->getRoleNames()->first()) }}</td>
-                            <td class="text-right"><a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-accent"><i
-                                            class="material-icons">edit</i></a>
-                                <a href="{{ route('users.delete', $user->id) }}" class="btn btn-sm btn-danger {{ ($user->id == Auth::user()->id) ? 'disabled' : '' }}" onclick="return confirm('Are you sure you want to delete this user?')" ><i
-                                            class="material-icons">delete</i></a></td>
+                            <td class="text-right">
+                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-accent">
+                                    <i class="material-icons">edit</i>
+                                </a>
+                                <form action="{{ route('users.delete', $user->id) }}" method="POST" class="d-inline-block">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit"
+                                            class="btn btn-sm btn-danger {{ ($user->id == Auth::user()->id) ? 'disabled' : '' }}"
+                                            onclick="return confirm('Are you sure you want to delete this user?')"><i
+                                                class="material-icons">delete</i>
+                                    </button>
+                                </form>
                         </tr>
                     @endforeach
                     </tbody>
@@ -49,7 +58,7 @@
                     null,
                     null,
                     null,
-                    { "orderable": false }
+                    {"orderable": false}
                 ]
             });
         });

@@ -12,13 +12,13 @@
 
 // Buttons
 .btn-accent {
-    color: #212529;
+    color: $active-bg;
     background-color: $accent;
     border-color: $accent;
 }
 
 .btn-accent:hover {
-    color: #212529;
+    color: $active-bg;
     background-color: darken($accent, 10%);
     border-color: darken($accent, 10%);
 }
@@ -31,7 +31,7 @@
 
 .btn-accent.disabled,
 .btn-accent:disabled {
-    color: #212529;
+    color: $active-bg;
     background-color: $accent;
     border-color: $accent;
 }
@@ -44,7 +44,7 @@
 }
 
 .btn-outline-warning:hover {
-    color: #212529;
+    color: $active-bg;
     background-color: $accent;
     border-color: $accent;
 }

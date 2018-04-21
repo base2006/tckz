@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -27,7 +29,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $roles = Role::all();
+
+        return view('users.create')->with('roles', $roles);
     }
 
     /**
@@ -38,7 +42,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'role' => 'required',
+            'password' => 'required|min:6|confirmed'
+        ]);
+
+        $user = new User();
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+
+        $user->save();
+
+        $user->assignRole($request->role);
+
+        return redirect()->route('users.index')->with('success', 'The user was successfully created.');
     }
 
     /**
@@ -87,13 +108,13 @@ class UserController extends Controller
         if (!empty($request->get('password'))) {
             $request->validate([
                 'name' => 'required',
-                'email' => 'required|email',
+                'email' => 'required|email|unique:users',
                 'password' => 'required|min:6|confirmed'
             ]);
         } else {
             $request->validate([
                 'name' => 'required',
-                'email' => 'required|email'
+                'email' => 'required|email|unique:users'
             ]);
         }
 
@@ -127,8 +148,8 @@ class UserController extends Controller
 
         $user->delete();
 
-        $success = "The user has successfully been deleted.";
+        $success = "The user has been deleted successfully.";
 
-        return view('users.edit')->with('success', $success);
+        return redirect()->route('users.index')->with('success', $success);
     }
 }

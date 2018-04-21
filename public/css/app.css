@@ -10673,13 +10673,13 @@ body {
 }
 
 .btn-accent {
-  color: #212529;
+  color: #34495e;
   background-color: #f1c40f;
   border-color: #f1c40f;
 }
 
 .btn-accent:hover {
-  color: #212529;
+  color: #34495e;
   background-color: #c29d0b;
   border-color: #c29d0b;
 }
@@ -10692,7 +10692,7 @@ body {
 
 .btn-accent.disabled,
 .btn-accent:disabled {
-  color: #212529;
+  color: #34495e;
   background-color: #f1c40f;
   border-color: #f1c40f;
 }
@@ -10705,7 +10705,7 @@ body {
 }
 
 .btn-outline-warning:hover {
-  color: #212529;
+  color: #34495e;
   background-color: #f1c40f;
   border-color: #f1c40f;
 }
