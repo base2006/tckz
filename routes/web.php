@@ -34,6 +34,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', 'HomeController@index')->name('home');
 
+    // User routes
     Route::get('/user/{id}/profile', 'UserController@show')->name('users.profile');
     Route::get('/user/{id}/edit', 'UserController@edit')->name('users.edit');
     Route::put('/user/{id}/update', 'UserController@update')->name('users.update');
@@ -45,5 +46,15 @@ Route::middleware('auth')->group(function () {
         Route::delete('/user/{id}/delete', 'UserController@destroy')->name('users.delete');
     });
 
+    // Event routes
+    Route::group(['middleware' => ['role:admin|manager']], function () {
+        Route::get('/events', 'EventController@index')->name('events.index');
+        Route::get('/event/{id}/show', 'EventController@show')->name('events.show');
+        Route::get('/event/create', 'EventController@create')->name('events.create');
+        Route::post('/event/store', 'EventController@store')->name('events.store');
+        Route::get('/event/{id}/edit', 'EventController@edit')->name('events.edit');
+        Route::put('/event/{id}/update', 'EventController@update')->name('events.update');
+        Route::delete('/event/{id}/delete', 'EventController@destroy')->name('events.delete');
+    });
 
 });

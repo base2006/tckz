@@ -6,7 +6,7 @@
         <ul id="sidebar-menu" class="nav flex-column w-100">
             <li class="nav-item"><a href="{{ route('home') }}" class="nav-link text-light"><i class="material-icons">dashboard</i> Dashboard</a></li>
             <li class="nav-item">
-                <a href="#" class="nav-link text-light"><i class="material-icons">event</i> Events</a>
+                <a href="{{ route('events.index') }}" class="nav-link text-light"><i class="material-icons">event</i> Events</a>
                 <ul class="submenu">
                     <li class="nav-item submenu-item"><a class="nav-link submenu-link text-light" href="#"><i class="material-icons">event</i> Create Event</a></li>
                 </ul>
