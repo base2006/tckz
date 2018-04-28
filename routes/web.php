@@ -55,6 +55,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/event/{id}/edit', 'EventController@edit')->name('events.edit');
         Route::put('/event/{id}/update', 'EventController@update')->name('events.update');
         Route::delete('/event/{id}/delete', 'EventController@destroy')->name('events.delete');
+        Route::get('/events/trashed', 'EventController@trashed')->name('events.trashed');
+        Route::put('/event/{id}/restore', 'EventController@restore')->name('events.restore');
+        Route::delete('/event/{id}/delete-forever', 'EventController@forceDestroy')->name('events.delete-forever');
     });
 
 });

@@ -5,6 +5,9 @@
  */
 require('./bootstrap');
 
+// Moment
+// require('moment');
+
 // Datatables
 require('datatables.net');
 require('datatables.net-bs4');
@@ -64,6 +67,7 @@ $(document).ready(function () {
             "opacity": 0
         });
     }, 300);
+
 
 
 });

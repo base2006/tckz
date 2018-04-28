@@ -32375,6 +32375,9 @@ module.exports = __webpack_require__(42);
  */
 __webpack_require__(16);
 
+// Moment
+// require('moment');
+
 // Datatables
 __webpack_require__(2);
 __webpack_require__(4);

@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'All Events')
+@section('title', 'Trashed Events')
 
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title">All Events</h3>
+            <h3 class="card-title">Trashed Events</h3>
             <div class="row">
                 <table id="users-table" class="table table-striped" cellspacing="0">
                     <thead>
@@ -17,7 +17,6 @@
                         <th scope="col">Location</th>
                         <th scope="col">Starts at</th>
                         <th scope="col">Ends at</th>
-                        <th scope="col">Active</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -31,18 +30,22 @@
                             <td>{{ $event->starts_at }}</td>
                             <td>{{ $event->ends_at }}</td>
                             <td>{{ $event->location }}</td>
-                            <td>{{ ($event->active == 1) ? "Yes" : "No"  }}</td>
                             <td class="text-right">
-                                <a href="{{ route('events.edit', $event->id) }}" class="btn btn-sm btn-accent">
-                                    <i class="material-icons">edit</i>
-                                </a>
-                                <form action="{{ route('events.delete', $event->id) }}" method="POST" class="d-inline-block">
+                                <form action="{{ route('events.restore', $event->id) }}" method="POST" class="d-inline-block">
+                                    @method('PUT')
+                                    @csrf
+                                    <button type="submit"
+                                            class="btn btn-sm btn-accent">
+                                        <i class="material-icons">restore</i>
+                                    </button>
+                                </form>
+                                <form action="{{ route('events.delete-forever', $event->id) }}" method="POST" class="d-inline-block">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit"
                                             class="btn btn-sm btn-danger"
-                                            onclick="return confirm('Are you sure you want to delete this event?')"><i
-                                                class="material-icons">delete</i>
+                                            onclick="return confirm('Are you sure you want to delete this event?')">
+                                        <i class="material-icons">delete_forever</i>
                                     </button>
                                 </form>
                             </td>

@@ -61,6 +61,49 @@
     background-color: transparent;
 }
 
+// Switch checkbox
+.switch {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+.switch-label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 32px;
+    height: 16px;
+    background: grey;
+    display: block;
+    border-radius: 16px;
+    position: relative;
+}
+
+.switch-label:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.switch:checked + .switch-label {
+    background: $accent;
+}
+
+.switch:checked + .switch-label:after {
+    left: calc(100% - 2px);
+    transform: translateX(-100%);
+}
+
+.switch-label:active:after {
+    width: 20px;
+}
+
 // Navbar
 .messages, .notifications {
     &.unread i {
@@ -148,6 +191,9 @@
     #content {
         flex: 1 1 auto;
         background-color: $active-bg;
+        @include media-breakpoint-up(xl) {
+            max-height: calc(100vh - 70px);
+            overflow: scroll;
+        }
     }
 }
-

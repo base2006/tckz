@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        return view('events.create');
     }
 
     /**
@@ -47,7 +48,32 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'location' => 'required',
+            'start_date' => 'required|date',
+            'start_time' => 'required|date_format:"H:i"',
+            'end_date' => 'required|date',
+            'end_time' => 'required|date_format:"H:i"',
+            'image' => 'image|mimes:jpg,jpeg,png'
+        ]);
+
+        $event = new Event();
+
+        $event->name = $request->name;
+        $event->subtitle = $request->subtitle;
+        $event->description = $request->description;
+        $event->starts_at = Carbon::createFromFormat('Y-m-d H:i', $request->start_date . ' ' . $request->start_time);
+        $event->ends_at = Carbon::createFromFormat('Y-m-d H:i', $request->end_date . ' ' . $request->end_time);
+        $event->is_active = $request->active;
+
+        $event->save();
+
+        if (!empty($request->image)) {
+            $event->addMediaFromRequest('image')->toMediaCollection();
+        }
+
+        return redirect()->route('events.index')->with('success', 'The event has been created successfully.');
     }
 
     /**
@@ -59,8 +85,9 @@ class EventController extends Controller
     public function show($id)
     {
         $event = Event::find($id);
+        $eventImage = $event->getFirstMedia();
 
-        return view('events.show')->with('event', $event);
+        return view('events.show')->with('event', $event)->with('evenImage', $eventImage);
     }
 
     /**
@@ -71,7 +98,10 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        //
+        $event = Event::find($id);
+        $eventImage = $event->getFirstMedia();
+
+        return view('events.edit')->with('event', $event)->with('eventImage', $eventImage);
     }
 
     /**
@@ -101,6 +131,34 @@ class EventController extends Controller
         $success = "The event has been deleted successfully.";
 
         return redirect()->route('events.index')->with('success', $success);
+    }
 
+    public function trashed()
+    {
+        $events = Event::onlyTrashed();
+
+        return view('events.trashed')->with('events', $events);
+    }
+
+    public function restore($id)
+    {
+        $event = Event::onlyTrashed()->where('id', $id)->first();
+
+        $event->restore();
+
+        $success = "The event has been restored successfully.";
+
+        return redirect()->route('events.index')->with('success', $success);
+    }
+
+    public function forceDestroy($id)
+    {
+        $event = Event::onlyTrashed()->where('id', $id)->first();
+
+        $event->forceDelete();
+
+        $success = "The event has been deleted successfully.";
+
+        return redirect()->route('events.trashed')->with('success', $success);
     }
 }

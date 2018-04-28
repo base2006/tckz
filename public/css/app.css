@@ -10662,7 +10662,9 @@ body {
   border-bottom: 5px solid white;
 }
 
-.form-control:focus {
+.form-control:focus,
+.custom-file-input:focus ~ .custom-file-label,
+.custom-file-input:focus ~ .custom-file-label::after {
   border-color: #f1c40f;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -10720,6 +10722,50 @@ body {
 .btn-outline-warning:disabled {
   color: #f1c40f;
   background-color: transparent;
+}
+
+.switch {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.switch-label {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 32px;
+  height: 16px;
+  background: grey;
+  display: block;
+  border-radius: 16px;
+  position: relative;
+}
+
+.switch-label:after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-radius: 12px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.switch:checked + .switch-label {
+  background: #f1c40f;
+}
+
+.switch:checked + .switch-label:after {
+  left: calc(100% - 2px);
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+}
+
+.switch-label:active:after {
+  width: 20px;
 }
 
 .messages.unread i,
@@ -10832,5 +10878,12 @@ body {
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   background-color: #34495e;
+}
+
+@media (min-width: 1200px) {
+  #content-panel > .row #content {
+    max-height: calc(100vh - 70px);
+    overflow: scroll;
+  }
 }
 

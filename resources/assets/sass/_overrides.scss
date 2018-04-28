@@ -28,7 +28,7 @@ body {
     border-right: 5px solid transparent;
     border-bottom: 5px solid white;
 }
-.form-control:focus {
+.form-control:focus, .custom-file-input:focus ~ .custom-file-label, .custom-file-input:focus ~ .custom-file-label::after {
     border-color: $accent;
     box-shadow: none;
 }

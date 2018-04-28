@@ -8,7 +8,8 @@
             <li class="nav-item">
                 <a href="{{ route('events.index') }}" class="nav-link text-light"><i class="material-icons">event</i> Events</a>
                 <ul class="submenu">
-                    <li class="nav-item submenu-item"><a class="nav-link submenu-link text-light" href="#"><i class="material-icons">event</i> Create Event</a></li>
+                    <li class="nav-item submenu-item"><a class="nav-link submenu-link text-light" href="{{ route('events.create') }}"><i class="material-icons">event</i> Create Event</a></li>
+                    <li class="nav-item submenu-item"><a class="nav-link submenu-link text-light" href="{{ route('events.trashed') }}"><i class="material-icons">delete</i> Trashed Events</a></li>
                 </ul>
             </li>
             <li class="nav-item"><a href="#" class="nav-link text-light"><i class="material-icons">confirmation_number</i> Tickets</a></li>
