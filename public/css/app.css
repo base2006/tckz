@@ -10674,6 +10674,14 @@ body {
   border-radius: 0;
 }
 
+.btn-link {
+  color: #f1c40f;
+}
+
+.btn-link:hover {
+  color: #c29d0b;
+}
+
 .btn-accent {
   color: #34495e;
   background-color: #f1c40f;
@@ -10722,6 +10730,36 @@ body {
 .btn-outline-warning:disabled {
   color: #f1c40f;
   background-color: transparent;
+}
+
+.remove-image {
+  border: none;
+  position: relative;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  max-width: 300px;
+}
+
+.remove-image:hover:after {
+  content: "delete";
+  position: absolute;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 5rem;
+  color: #fff;
+  pointer-events: none;
 }
 
 .switch {
@@ -10871,6 +10909,24 @@ body {
   -webkit-box-flex: 0;
       -ms-flex: 0 1 70px;
           flex: 0 1 70px;
+}
+
+#content-panel > .row #login {
+  height: 100vh;
+  background-color: #34495e;
+}
+
+#content-panel > .row #login #tckz_logo {
+  max-width: 2.1rem;
+  height: auto;
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+#content-panel > .row #login .logo-text {
+  font-family: 'Lobster Two', cursive;
+  font-size: 2.75rem;
+  color: #f1c40f;
 }
 
 #content-panel > .row #content {

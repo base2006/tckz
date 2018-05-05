@@ -1,17 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Create User')
-
-@section('styles')
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css"/>
-@endsection
+@section('title', 'Create Event')
 
 @section('content')
     <div class="card">
         <div class="card-body">
             <h3 class="card-title">Create Event</h3>
-            <form action="{{ route('events.store') }}" method="POST">
+            <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -69,7 +64,7 @@
                 </div>
                 <div class="form-group">
                     <label>Activate event</label>
-                    <input type="checkbox" class="switch" id="switch" name="active" {{ (old('active') == true) ? 'checked' : '' }}/>
+                    <input type="checkbox" class="switch" id="switch" name="active" value="1" {{ (old('active') == true) ? 'checked' : '' }}/>
                     <label class="switch-label" for="switch">Toggle</label>
                 </div>
                 <button type="submit" class="btn btn-accent"><i class="material-icons">event</i> Create Event</button>
@@ -116,6 +111,14 @@
                 });
             }
         }
+
+        $(document).ready(function () {
+            var date = new Date(),
+                y = date.getFullYear(),
+                m = date.getMonth(),
+                d = date.getDate();
+            $('input[type="date"]').attr('min', y+'-'+m+'-'+d);
+        });
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx18INVg2Oi_d5VjJEAcpqdpS810cFYZg&libraries=places&callback=initAutocomplete"
             async defer></script>

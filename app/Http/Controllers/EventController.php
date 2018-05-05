@@ -6,6 +6,8 @@ use App\Event;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Session;
 
 class EventController extends Controller
 {
@@ -63,9 +65,10 @@ class EventController extends Controller
         $event->name = $request->name;
         $event->subtitle = $request->subtitle;
         $event->description = $request->description;
+        $event->location = $request->location;
         $event->starts_at = Carbon::createFromFormat('Y-m-d H:i', $request->start_date . ' ' . $request->start_time);
         $event->ends_at = Carbon::createFromFormat('Y-m-d H:i', $request->end_date . ' ' . $request->end_time);
-        $event->is_active = $request->active;
+        $event->is_active = $request->active ?? 0;
 
         $event->save();
 
@@ -101,7 +104,16 @@ class EventController extends Controller
         $event = Event::find($id);
         $eventImage = $event->getFirstMedia();
 
-        return view('events.edit')->with('event', $event)->with('eventImage', $eventImage);
+        if (!empty($eventImage)) {
+            $eventImage = $eventImage->getUrl();
+        }
+
+        $start_date = Carbon::createFromFormat('Y-m-d H:i:s', $event->starts_at)->format('Y-m-d');
+        $start_time = Carbon::createFromFormat('Y-m-d H:i:s', $event->starts_at)->format('H:i');
+        $end_date = Carbon::createFromFormat('Y-m-d H:i:s', $event->ends_at)->format('Y-m-d');
+        $end_time = Carbon::createFromFormat('Y-m-d H:i:s', $event->ends_at)->format('H:i');
+
+        return view('events.edit')->with(compact(['event', 'eventImage', 'start_date', 'start_time', 'end_date', 'end_time']));
     }
 
     /**
@@ -113,7 +125,36 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'location' => 'required',
+            'start_date' => 'required|date',
+            'start_time' => 'required|date_format:"H:i"',
+            'end_date' => 'required|date',
+            'end_time' => 'required|date_format:"H:i"',
+            'image' => 'image|mimes:jpg,jpeg,png'
+        ]);
+
+        $event = Event::find($id);
+
+        $event->name = $request->name;
+        $event->subtitle = $request->subtitle;
+        $event->description = $request->description;
+        $event->location = $request->location;
+        $event->starts_at = Carbon::createFromFormat('Y-m-d H:i', $request->start_date . ' ' . $request->start_time);
+        $event->ends_at = Carbon::createFromFormat('Y-m-d H:i', $request->end_date . ' ' . $request->end_time);
+        $event->is_active = $request->active ?? 0;
+
+        $event->save();
+
+        if (!empty($request->event_image)) {
+            $event->clearMediaCollection();
+            $event->addMediaFromRequest('event_image')->toMediaCollection();
+        } else if (isset($request->removed_image) && $request->removed_image == 1) {
+            $event->clearMediaCollection();
+        }
+
+        return redirect()->route('events.index')->with('success', 'The event has been updated successfully.');
     }
 
     /**

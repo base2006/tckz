@@ -35,29 +35,30 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', 'HomeController@index')->name('home');
 
     // User routes
-    Route::get('/user/{id}/profile', 'UserController@show')->name('users.profile');
-    Route::get('/user/{id}/edit', 'UserController@edit')->name('users.edit');
-    Route::put('/user/{id}/update', 'UserController@update')->name('users.update');
+    Route::get('/users/{id}/profile', 'UserController@show')->name('users.profile');
+    Route::get('/users/{id}/edit', 'UserController@edit')->name('users.edit');
+    Route::put('/users/{id}/update', 'UserController@update')->name('users.update');
 
     Route::group(['middleware' => ['role:admin']], function () {
         Route::get('/users', 'UserController@index')->name('users.index');
-        Route::get('/user/create', 'UserController@create')->name('users.create');
-        Route::post('/user/store', 'UserController@store')->name('users.store');
-        Route::delete('/user/{id}/delete', 'UserController@destroy')->name('users.delete');
+        Route::get('/users/create', 'UserController@create')->name('users.create');
+        Route::post('/users/store', 'UserController@store')->name('users.store');
+        Route::delete('/users/{id}/delete', 'UserController@destroy')->name('users.delete');
     });
 
     // Event routes
     Route::group(['middleware' => ['role:admin|manager']], function () {
         Route::get('/events', 'EventController@index')->name('events.index');
-        Route::get('/event/{id}/show', 'EventController@show')->name('events.show');
-        Route::get('/event/create', 'EventController@create')->name('events.create');
-        Route::post('/event/store', 'EventController@store')->name('events.store');
-        Route::get('/event/{id}/edit', 'EventController@edit')->name('events.edit');
-        Route::put('/event/{id}/update', 'EventController@update')->name('events.update');
-        Route::delete('/event/{id}/delete', 'EventController@destroy')->name('events.delete');
+        Route::get('/events/{id}/show', 'EventController@show')->name('events.show');
+        Route::get('/events/create', 'EventController@create')->name('events.create');
+        Route::post('/events/store', 'EventController@store')->name('events.store');
+        Route::get('/events/{id}/edit', 'EventController@edit')->name('events.edit');
+        Route::put('/events/{id}/update', 'EventController@update')->name('events.update');
+        Route::delete('/events/{id}/delete', 'EventController@destroy')->name('events.delete');
         Route::get('/events/trashed', 'EventController@trashed')->name('events.trashed');
-        Route::put('/event/{id}/restore', 'EventController@restore')->name('events.restore');
-        Route::delete('/event/{id}/delete-forever', 'EventController@forceDestroy')->name('events.delete-forever');
+        Route::put('/events/{id}/restore', 'EventController@restore')->name('events.restore');
+        Route::delete('/events/{id}/delete-forever', 'EventController@forceDestroy')->name('events.delete-forever');
+        Route::post('/events/{id}/remove-image', 'EventController@removeImage')->name('events.remove-image');
     });
 
 });

@@ -12,7 +12,7 @@
                     <li class="nav-item submenu-item"><a class="nav-link submenu-link text-light" href="{{ route('events.trashed') }}"><i class="material-icons">delete</i> Trashed Events</a></li>
                 </ul>
             </li>
-            <li class="nav-item"><a href="#" class="nav-link text-light"><i class="material-icons">confirmation_number</i> Tickets</a></li>
+            <li class="nav-item"><a href="/tickets" class="nav-link text-light"><i class="material-icons">confirmation_number</i> Tickets</a></li>
             <li class="nav-item">
                 <a href="{{ route('users.index') }}" class="nav-link text-light">
                     <i class="material-icons">people</i> Users
@@ -21,7 +21,7 @@
                     <li class="nav-item submenu-item"><a class="nav-link submenu-link text-light" href="{{ route('users.create') }}"><i class="material-icons">person</i> Create User</a></li>
                 </ul>
             </li>
-            <li class="nav-item"><a href="#" class="nav-link text-light"><i class="material-icons">settings</i> Settings</a></li>
+            <li class="nav-item"><a href="/settings" class="nav-link text-light"><i class="material-icons">settings</i> Settings</a></li>
         </ul>
     </div>
 </div>

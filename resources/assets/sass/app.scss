@@ -11,6 +11,12 @@
 @import "overrides";
 
 // Buttons
+.btn-link {
+    color: $accent;
+    &:hover {
+        color: darken($accent, 10%);
+    }
+}
 .btn-accent {
     color: $active-bg;
     background-color: $accent;
@@ -59,6 +65,28 @@
 .btn-outline-warning:disabled {
     color: $accent;
     background-color: transparent;
+}
+
+.remove-image {
+    border: none;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    max-width: 300px;
+    &:hover:after {
+        content: "delete";
+        position: absolute;
+        background: rgba(0,0,0,0.4);
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 5rem;
+        color: #fff;
+        pointer-events: none;
+    }
 }
 
 // Switch checkbox
@@ -121,6 +149,7 @@
         }
     }
 }
+
 
 // Sidebar
 #sidebar {
@@ -187,6 +216,22 @@
     flex-flow: column;
     .navbar {
         flex: 0 1 70px;
+    }
+    #login {
+        height: 100vh;
+        background-color: $active-bg;
+        #tckz_logo {
+            max-width: 2.1rem;
+            height: auto;
+            display: inline-block;
+            margin-right: 1rem;
+        }
+        .logo-text {
+            font-family: 'Lobster Two', cursive;
+            font-size: 2.75rem;
+            color: $accent;
+        }
+
     }
     #content {
         flex: 1 1 auto;

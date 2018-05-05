@@ -28,10 +28,10 @@
                             <td>{{ $event->name }}</td>
                             <td>{{ $event->subtitle }}</td>
                             <td>{{ $event->description }}</td>
-                            <td>{{ $event->starts_at }}</td>
-                            <td>{{ $event->ends_at }}</td>
+                            <td>{{ \Carbon\Carbon::parse($event->starts_at)->format('d-m-y H:i') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($event->ends_at)->format('d-m-y H:i') }}</td>
                             <td>{{ $event->location }}</td>
-                            <td>{{ ($event->active == 1) ? "Yes" : "No"  }}</td>
+                            <td>{{ ($event->is_active == 1) ? "Yes" : "No"  }}</td>
                             <td class="text-right">
                                 <a href="{{ route('events.edit', $event->id) }}" class="btn btn-sm btn-accent">
                                     <i class="material-icons">edit</i>
